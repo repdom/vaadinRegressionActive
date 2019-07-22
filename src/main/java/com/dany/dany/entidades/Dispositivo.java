@@ -1,50 +1,50 @@
 package com.dany.dany.entidades;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Set;
 
 @Entity
 public class Dispositivo implements Serializable {
     @Id
     @GeneratedValue
     private Long idDispositivo;
-    private Date fechageneracion;
-    private Long temperatura;
-    private Long humedad;
+    private String nombre;
+    private Long tiempoDeAlarma;
+
+    @OneToMany(mappedBy = "dispositivo", fetch = FetchType.EAGER)
+    private Set<Entradas> entradasDispositivos;
 
     public Long getIdDispositivo() {
         return idDispositivo;
     }
 
-    public void setIdDispositivo(long idDispositivo) {
+    public void setIdDispositivo(Long idDispositivo) {
         this.idDispositivo = idDispositivo;
     }
 
-    public Date getFechageneracion() {
-        return fechageneracion;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setFechageneracion(Date fechageneracion) {
-        this.fechageneracion = fechageneracion;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public Long getTemperatura() {
-        return temperatura;
+    public Long getTiempoDeAlarma() {
+        return tiempoDeAlarma;
     }
 
-    public void setTemperatura(long temperatura) {
-        this.temperatura = temperatura;
+    public void setTiempoDeAlarma(Long tiempoDeAlarma) {
+        this.tiempoDeAlarma = tiempoDeAlarma;
     }
 
-    public Long getHumedad() {
-        return humedad;
+    public Set<Entradas> getEntradasDispositivos() {
+        return entradasDispositivos;
     }
 
-    public void setHumedad(long humedad) {
-        this.humedad = humedad;
+    public void setEntradasDispositivos(Set<Entradas> entradasDispositivos) {
+        this.entradasDispositivos = entradasDispositivos;
     }
 }

@@ -8,9 +8,6 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
-import org.springframework.util.StringUtils;
-
-import java.awt.*;
 
 @Route(value = "VistaCrud", layout = MainLayout.class)
 public class VistaCrud extends VerticalLayout {
@@ -28,7 +25,7 @@ public class VistaCrud extends VerticalLayout {
         HorizontalLayout actions = new HorizontalLayout(addNewBtn);
         add(actions, grid, editor);
         grid.setHeight("300px");
-        grid.setColumns("idDispositivo", "fechageneracion", "temperatura", "humedad");
+        grid.setColumns("idDispositivo", "nombre", "tiempoDeAlarma");
         grid.getColumnByKey("idDispositivo").setWidth("30px").setFlexGrow(0);
         // add(grid);
         grid.asSingleSelect().addValueChangeListener(e -> {

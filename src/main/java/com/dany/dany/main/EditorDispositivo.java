@@ -1,26 +1,18 @@
 package com.dany.dany.main;
 import com.dany.dany.entidades.Dispositivo;
 import com.dany.dany.repositorio.DispositivoRepository;
-import com.sun.javafx.collections.ChangeHelper;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyNotifier;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
-import com.vaadin.flow.data.converter.*;
+import com.vaadin.flow.data.converter.StringToLongConverter;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.convert.JodaTimeConverters;
-import org.springframework.data.convert.Jsr310Converters;
-
-import javax.swing.plaf.basic.BasicMenuUI;
-import java.time.LocalDate;
 
 @SpringComponent
 @UIScope
@@ -30,8 +22,8 @@ public class EditorDispositivo extends VerticalLayout implements KeyNotifier {
     private Dispositivo dispositivo;
 
     // TextField fechageneracion = new TextField("Fecha generacion");
-    TextField temperatura = new TextField("Temperatura");
-    TextField humedad = new TextField("Humedad");
+    TextField nombre = new TextField("Nombre");
+    TextField tiempoAlerta = new TextField("Tiempo de alerta");
 
     Button guardar = new Button("Guardar", VaadinIcon.CHECK.create());
     Button cancelar = new Button("Cancelar");
@@ -46,17 +38,16 @@ public class EditorDispositivo extends VerticalLayout implements KeyNotifier {
     public EditorDispositivo(DispositivoRepository repository) {
         this.repo = repository;
 
-        add(temperatura, humedad, actions);
+        add(nombre, tiempoAlerta, actions);
 
         // binder.forField(fechageneracion).withNullRepresentation("").withConverter(new DateToLongConverter().toString());
-        binder.forField ( this.humedad )
+        binder.forField ( this.tiempoAlerta)
                 .withNullRepresentation ( "" )
                 .withConverter (new StringToLongConverter(Long.valueOf(0L), "No pueden conversirse nada"))
-                .bind (Dispositivo::getHumedad, Dispositivo::setHumedad);
-        binder.forField ( this.temperatura )
+                .bind (Dispositivo::getTiempoDeAlarma, Dispositivo::setTiempoDeAlarma);
+        binder.forField ( this.nombre)
                 .withNullRepresentation ( "" )
-                .withConverter (new StringToLongConverter(Long.valueOf(0L), "No pueden conversirse nada"))
-                .bind (Dispositivo::getTemperatura, Dispositivo::setTemperatura);
+                .bind (Dispositivo::getNombre, Dispositivo::setNombre);
         binder.bindInstanceFields(this);
 
         setSpacing(true);
@@ -103,7 +94,7 @@ public class EditorDispositivo extends VerticalLayout implements KeyNotifier {
 
         setVisible(true);
 
-        temperatura.focus();
+        nombre.focus();
     }
 
     public void setChangeHandler(ChangeHandler h) {

@@ -10,5 +10,7 @@ public interface DispositivoRepository extends JpaRepository<Dispositivo, Long> 
 
     List<Dispositivo> findAll();
 
-    // Dispositivo> findByCodigo(Long codigo);
+    Dispositivo findByIdDispositivo(Long codigo);
+
+    Dispositivo findByNombre(String nombre);
 }
