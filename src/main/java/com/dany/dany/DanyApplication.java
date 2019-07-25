@@ -38,12 +38,43 @@ public class DanyApplication {
 
 			Dispositivo dispositivo3 = new Dispositivo();
 			dispositivo3.setNombre("ATX BUILD 3");
-			dispositivo3.setIdDispositivo(2L);
+			dispositivo3.setIdDispositivo(3L);
 			dispositivo3.setTiempoDeAlarma(1L);
+
+			Dispositivo dispositivo4 = new Dispositivo();
+			dispositivo4.setNombre("ATX BUILD 4");
+			dispositivo4.setIdDispositivo(4L);
+			dispositivo4.setTiempoDeAlarma(1L);
+
+			Dispositivo dispositivo5 = new Dispositivo();
+			dispositivo5.setNombre("ATX BUILD 5");
+			dispositivo5.setIdDispositivo(5L);
+			dispositivo5.setTiempoDeAlarma(1L);
+
+			Dispositivo dispositivo6 = new Dispositivo();
+			dispositivo6.setNombre("ATX BUILD 6");
+			dispositivo6.setIdDispositivo(6L);
+			dispositivo6.setTiempoDeAlarma(1L);
+
+			Dispositivo dispositivo7 = new Dispositivo();
+			dispositivo7.setNombre("ATX BUILD 7");
+			dispositivo7.setIdDispositivo(7L);
+			dispositivo7.setTiempoDeAlarma(1L);
+
+			Dispositivo dispositivo8 = new Dispositivo();
+			dispositivo8.setNombre("ATX BUILD 8");
+			dispositivo8.setIdDispositivo(8L);
+			dispositivo8.setTiempoDeAlarma(1L);
+
 
 			repository.save(dispositivo);
 			repository.save(dispositivo2);
+			repository.save(dispositivo4);
+			repository.save(dispositivo5);
 			repository.save(dispositivo3);
+			repository.save(dispositivo6);
+			repository.save(dispositivo7);
+			repository.save(dispositivo8);
 
 			log.info("Customers found with findAll():");
 			log.info("-------------------------------");

@@ -26,7 +26,7 @@ public class Dashboard extends Div {
 
     public Dashboard(@Autowired DispositivoService dispositivoService, @Autowired DispositivoEntradasServices dispositivoEntradasServices) {
         VerticalLayout layout = new VerticalLayout();
-
+        this.setWidth("100%");
         // MenuView menuView = new MenuView("dashboard");
        //  menuView.getStyle().set("margin-bottom", "20px");
         Select<String> select = new Select<>();
@@ -71,11 +71,11 @@ public class Dashboard extends Div {
         humData.setName("Humedad");
 
         configuration.setSeries(tempData, humData);
-
         layout.add(select, chart);
         layout.setPadding(true);
         layout.setMargin(true);
         layout.setSpacing(true);
+        // layout.setHeight("100%");
         add(layout);
     }
 }

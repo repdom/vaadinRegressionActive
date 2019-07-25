@@ -24,7 +24,8 @@ public class VistaCrud extends VerticalLayout {
 
         HorizontalLayout actions = new HorizontalLayout(addNewBtn);
         add(actions, grid, editor);
-        grid.setHeight("300px");
+        this.setWidth("100%");
+        grid.setHeight("100px");
         grid.setColumns("idDispositivo", "nombre", "tiempoDeAlarma");
         grid.getColumnByKey("idDispositivo").setWidth("30px").setFlexGrow(0);
         // add(grid);
