@@ -113,11 +113,11 @@ public class ConfiguracionSeguridad extends WebSecurityConfigurerAdapter {
                         "/**/*.js",
                         "/**/*.jsp",
                         "/**/*.do")
-                .permitAll()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll();//indicando la ruta que estaremos utilizando.
+                .permitAll();
+                //.and()
+                //.formLogin()
+                //.loginPage("/login")
+                //.permitAll();//indicando la ruta que estaremos utilizando.
 
         //deshabilitando las seguridad contra los frame internos.
         //Necesario para H2.
