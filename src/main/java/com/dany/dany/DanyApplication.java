@@ -1,27 +1,62 @@
 package com.dany.dany;
 
 import com.dany.dany.entidades.Dispositivo;
+import com.dany.dany.entidades.Usuario;
+import com.dany.dany.main.email.AsynchronousAlarmService;
 import com.dany.dany.repositorio.DispositivoRepository;
+import com.dany.dany.repositorio.UsuarioRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Date;
+import java.util.Properties;
 
 @SpringBootApplication
 public class DanyApplication {
+
+
+
 	private static final Logger log = LoggerFactory.getLogger(DanyApplication.class);
 	// private static DispositivoRepository repo;
+
+	@Autowired
+	AsynchronousAlarmService asynchronousAlarmService;
+
+//	@Autowired
+//	BCryptPasswordEncoder encoder;
+
+	@Bean
+	public JavaMailSender getJavaMailSender() {
+		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+		mailSender.setHost("smtp.gmail.com");
+		mailSender.setPort(587);
+
+		mailSender.setUsername("dhamarmj@gmail.com");
+		mailSender.setPassword("DhotmaM0496");
+
+		Properties props = mailSender.getJavaMailProperties();
+		props.put("mail.transport.protocol", "smtp");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.debug", "true");
+
+		return mailSender;
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(DanyApplication.class, args);
 	}
 
 	@Bean
-	public CommandLineRunner cargarDatos(DispositivoRepository repository) {
+	public CommandLineRunner cargarDatos(DispositivoRepository repository, UsuarioRepository usuarioRepository) {
 		// this.repo = repository;
 		// DispositivoRepository repository;
 		return (args -> {
@@ -75,6 +110,16 @@ public class DanyApplication {
 			repository.save(dispositivo6);
 			repository.save(dispositivo7);
 			repository.save(dispositivo8);
+
+
+			Usuario admin = new Usuario();
+			admin.setNombre("ADMIN");
+			admin.setUsuario("admin");
+			admin.setContraisena(("admin"));
+			admin.setEmail("dhamarmj@hotmail.com");
+			usuarioRepository.save(admin);
+
+			asynchronousAlarmService.executeAsynchronously();
 
 			log.info("Customers found with findAll():");
 			log.info("-------------------------------");

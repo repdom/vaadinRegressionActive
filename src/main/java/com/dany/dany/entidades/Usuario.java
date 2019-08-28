@@ -1,8 +1,9 @@
 package com.dany.dany.entidades;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Usuario implements Serializable {
@@ -52,4 +53,5 @@ public class Usuario implements Serializable {
     public void setContraisena(String contraisena) {
         this.contraisena = contraisena;
     }
+
 }
