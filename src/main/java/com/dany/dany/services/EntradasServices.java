@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class DispositivoEntradasServices {
+public class EntradasServices {
     @Autowired
     EntradaRepository entradaRepository;
 
@@ -47,5 +47,16 @@ public class DispositivoEntradasServices {
 
     public List<Entradas> getAllEntradas(Dispositivo id) {
         return entradaRepository.findAllByDispositivo(id);
+    }
+
+    public Entradas getLastMessageById(Long id) {
+        try {
+            return entradaRepository.findLastByDeviceId(id).get(0);
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
+    }
+    public List<Entradas> getAllSensorMessagesById(Long id) {
+        return  entradaRepository.findAllByIdDispositivo(id);
     }
 }

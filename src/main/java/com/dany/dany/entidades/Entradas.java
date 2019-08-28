@@ -1,9 +1,8 @@
 package com.dany.dany.entidades;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import org.springframework.data.repository.cdi.Eager;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,7 +15,8 @@ public class Entradas implements Serializable {
     private Date fechageneracion;
     private Long temperatura;
     private Long humedad;
-    @ManyToOne
+
+    @ManyToOne (fetch = FetchType.EAGER)
     private Dispositivo dispositivo;
 
     public Long getIdDispositivo() {

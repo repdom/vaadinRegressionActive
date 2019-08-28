@@ -23,4 +23,5 @@ public class DispositivoService {
     }
 
     public Dispositivo find(Long id) {return  dispositivoRepository.findByIdDispositivo(id); }
+
 }

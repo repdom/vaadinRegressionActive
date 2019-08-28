@@ -1,6 +1,6 @@
 package com.dany.dany.main;
 
-import com.dany.dany.services.DispositivoEntradasServices;
+import com.dany.dany.services.EntradasServices;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.amqp.core.Message;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class Recibidor {
 
     @Autowired
-    DispositivoEntradasServices dispositivoEntradasServices;
+    EntradasServices entradasServices;
 
     @RabbitListener(queues = "dispositivo")
     public void receive(Message in) throws Exception {
@@ -21,6 +21,6 @@ public class Recibidor {
 
        System.out.println(" [x] Received '" + jsonNode.toString() + "'");
 
-        dispositivoEntradasServices.guardarDispositivo(jsonNode);
+        entradasServices.guardarDispositivo(jsonNode);
     }
 }
